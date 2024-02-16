@@ -26,7 +26,7 @@ SourceZ3="https://github.com/Z3Prover/z3/archive/refs/tags/z3-4.8.8.zip"
 
 # Keep LLVM version suffix for version checking and better debugging
 # keep the version consistent with LLVM_DIR in setup.sh and llvm_version in Dockerfile
-LLVMHome="llvm-14.0.0.obj"
+LLVMHome="../../../build"
 Z3Home="z3.obj"
 
 
@@ -220,15 +220,18 @@ if [[ $1 =~ ^[Dd]ebug$ ]]; then
 else
     BUILD_TYPE='Release'
 fi
+BUILD_TYPE='Debug'
 BUILD_DIR="./${BUILD_TYPE}-build"
 
 rm -rf "${BUILD_DIR}"
 mkdir "${BUILD_DIR}"
 # If you need shared libs, turn BUILD_SHARED_LIBS on
 cmake -D CMAKE_BUILD_TYPE:STRING="${BUILD_TYPE}" \
+    -DLLVM_USE_LINKER=gold \
     -DSVF_ENABLE_ASSERTIONS:BOOL=true            \
     -DSVF_SANITIZE="${SVF_SANITIZER}"            \
-    -DBUILD_SHARED_LIBS=off                      \
+    -DBUILD_SHARED_LIBS=on                      \
+    -G Ninja                                    \
     -S "${SVFHOME}" -B "${BUILD_DIR}"
 cmake --build "${BUILD_DIR}" -j ${jobs}
 
