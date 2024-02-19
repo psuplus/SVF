@@ -165,6 +165,14 @@ public:
         return getCachedPointsTo(dpm);
     }
 
+    const DPImToCPtSetMap& getDpmToTLCPtSetMap() {
+        return dpmToTLCPtSetMap;
+    }
+
+    const DPImToCPtSetMap& getDpmToADCPtSetMap() {
+        return dpmToADCPtSetMap;
+    }
+
 protected:
     /// Handle single statement
     virtual void handleSingleStatement(const DPIm& dpm, CPtSet& pts)
