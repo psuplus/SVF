@@ -68,12 +68,13 @@ WPAPass::~WPAPass()
  */
 void WPAPass::runOnModule(SVFIR* pag)
 {
-    for (u32_t i = 0; i<= PointerAnalysis::Default_PTA; i++)
-    {
-        PointerAnalysis::PTATY iPtaTy = static_cast<PointerAnalysis::PTATY>(i);
-        if (Options::PASelected(iPtaTy))
-            runPointerAnalysis(pag, i);
-    }
+    // for (u32_t i = 0; i<= PointerAnalysis::Default_PTA; i++)
+    // {
+    //     PointerAnalysis::PTATY iPtaTy = static_cast<PointerAnalysis::PTATY>(i);
+    //     if (Options::PASelected(iPtaTy))
+    //         runPointerAnalysis(pag, i);
+    // }
+    runPointerAnalysis(pag, 4);
     assert(!ptaVector.empty() && "No pointer analysis is specified.\n");
 }
 
@@ -116,15 +117,15 @@ void WPAPass::runPointerAnalysis(SVFIR* pag, u32_t kind)
 
     ptaVector.push_back(_pta);
     _pta->analyze();
-    if (Options::AnderSVFG())
-    {
+    // if (Options::AnderSVFG())
+    // {
         SVFGBuilder memSSA(true);
         assert(SVFUtil::isa<AndersenBase>(_pta) && "supports only andersen/steensgaard for pre-computed SVFG");
         SVFG *svfg = memSSA.buildFullSVFG((BVDataPTAImpl*)_pta);
         /// support mod-ref queries only for -ander
-        if (Options::PASelected(PointerAnalysis::AndersenWaveDiff_WPA))
-            _svfg = svfg;
-    }
+        // if (Options::PASelected(PointerAnalysis::AndersenWaveDiff_WPA))
+        _svfg = svfg;
+    // }
 
     if (Options::PrintAliases())
         PrintAliasPairs(_pta);

@@ -109,6 +109,14 @@ public:
         return "WPAPass";
     }
 
+    PointerAnalysis* getPointerAnalysis() {
+        return ptaVector[0];
+    }
+
+    virtual inline SVFG* getSVFG() {
+        return _svfg;
+    }
+
 private:
     /// Create pointer analysis according to specified kind and analyze the module.
     void runPointerAnalysis(SVFIR* pag, u32_t kind);

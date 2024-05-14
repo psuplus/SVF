@@ -116,6 +116,9 @@ PTACallGraph::PTACallGraph(CGEK k): kind(k)
  */
 void PTACallGraph::destroy()
 {
+    idToCSMap.clear();
+    csToIdMap.clear();
+    totalCallSiteNum = 1;
 }
 
 /*!

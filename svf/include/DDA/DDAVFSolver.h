@@ -137,9 +137,12 @@ public:
     /// Compute points-to
     virtual const CPtSet& findPT(const DPIm& dpm)
     {
-
+        SVFUtil::outs() << "________findPT________\n";
+        dpm.dump();
+        SVFUtil::outs() << "dpm ID: " << dpm.getCurNodeID() << "\n";
         if(isbkVisited(dpm))
         {
+            SVFUtil::outs() << "already visited\n";
             const CPtSet& cpts = getCachedPointsTo(dpm);
             DBOUT(DDDA, SVFUtil::outs() << "\t already backward visited dpm: ");
             DBOUT(DDDA, dpm.dump());
@@ -159,6 +162,8 @@ public:
             CPtSet pts;
             handleSingleStatement(dpm, pts);
 
+            // SVFUtil::outs() << "findPT:";
+            // dpm.dump();
             /// Add successors of current stmt if its pts has been changed.
             updateCachedPointsTo(dpm, pts);
         }
@@ -171,6 +176,12 @@ public:
 
     const DPImToCPtSetMap& getDpmToADCPtSetMap() {
         return dpmToADCPtSetMap;
+    }
+
+    /// GetDefinition SVFG
+    inline const SVFGNode* getDefSVFGNode(const PAGNode* pagNode) const
+    {
+        return getSVFG()->getDefSVFGNode(pagNode);
     }
 
 protected:
@@ -345,11 +356,7 @@ protected:
                     clearbkVisited(*dit);
         }
     }
-    /// GetDefinition SVFG
-    inline const SVFGNode* getDefSVFGNode(const PAGNode* pagNode) const
-    {
-        return getSVFG()->getDefSVFGNode(pagNode);
-    }
+
     /// Backward traverse along indirect value flows
     void backtraceAlongIndirectVF(CPtSet& pts, const DPIm& oldDpm)
     {

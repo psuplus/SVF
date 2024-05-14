@@ -159,6 +159,10 @@ public:
     {
         elements.insert(var);
     }
+    inline void insert(const CondStdSet &set)
+    {
+        elements.insert(set.begin(), set.end());
+    }
     /// Remove var from the set.
     inline void reset(const Element& var)
     {
