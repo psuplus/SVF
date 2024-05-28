@@ -205,6 +205,12 @@ public:
         return it->second;
     }
 
+    inline bool hasSVFFunction(const Function* fun) const
+    {
+        LLVMFun2SVFFunMap::const_iterator it = LLVMFunc2SVFFunc.find(fun);
+        return it != LLVMFunc2SVFFunc.end();
+    }
+
     inline SVFBasicBlock* getSVFBasicBlock(const BasicBlock* bb) const
     {
         LLVMBB2SVFBBMap::const_iterator it = LLVMBB2SVFBB.find(bb);
