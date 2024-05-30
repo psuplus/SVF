@@ -138,7 +138,7 @@ public:
     virtual const CPtSet& findPT(const DPIm& dpm)
     {
         SVFUtil::outs() << "________findPT________\n";
-        dpm.dump();
+        // dpm.dump();
         SVFUtil::outs() << "dpm ID: " << dpm.getCurNodeID() << "\n";
         if(isbkVisited(dpm))
         {
