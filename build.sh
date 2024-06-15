@@ -231,6 +231,8 @@ cmake -D CMAKE_BUILD_TYPE:STRING="${BUILD_TYPE}" \
     -DSVF_ENABLE_ASSERTIONS:BOOL=true            \
     -DSVF_SANITIZE="${SVF_SANITIZER}"            \
     -DBUILD_SHARED_LIBS=on                      \
+    -DCMAKE_CXX_COMPILER=$LLVM_DIR/bin/clang++ \
+    -DLLVM_DIR=$LLVM_DIR                          \
     -G Ninja                                    \
     -S "${SVFHOME}" -B "${BUILD_DIR}"
 cmake --build "${BUILD_DIR}" -j ${jobs}
