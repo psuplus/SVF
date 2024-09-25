@@ -232,6 +232,8 @@ cmake -D CMAKE_BUILD_TYPE:STRING="${BUILD_TYPE}" \
     -DSVF_SANITIZE="${SVF_SANITIZER}"            \
     -DBUILD_SHARED_LIBS=on                      \
     -DCMAKE_CXX_COMPILER=$LLVM_DIR/bin/clang++ \
+    -DCMAKE_C_COMPILER=$LLVM_DIR/bin/clang \
+    -DCMAKE_LINKER=$LLVM_DIR/bin/llvm-link \
     -DLLVM_DIR=$LLVM_DIR                          \
     -G Ninja                                    \
     -S "${SVFHOME}" -B "${BUILD_DIR}"
