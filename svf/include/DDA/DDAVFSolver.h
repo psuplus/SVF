@@ -137,9 +137,6 @@ public:
     /// Compute points-to
     virtual const CPtSet& findPT(const DPIm& dpm)
     {
-        SVFUtil::outs() << "________findPT________\n";
-        // dpm.dump();
-        SVFUtil::outs() << "dpm ID: " << dpm.getCurNodeID() << "\n";
         if(isbkVisited(dpm))
         {
             SVFUtil::outs() << "already visited\n";

@@ -369,6 +369,17 @@ public:
         rawstr << " ]";
         return rawstr.str();
     }
+    bool isImmediatePrefix(const ContextCond &that) const
+    {
+        if (context.size() + 1 != that.context.size())
+            return false;
+        for (u32_t i = 0; i < context.size(); ++i)
+        {
+            if (context[i] != that.context[i])
+                return false;
+        }
+        return true;
+    }
 protected:
     CallStrCxt context;
     static u32_t maximumCxtLen;

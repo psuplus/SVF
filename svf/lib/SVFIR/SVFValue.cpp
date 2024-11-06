@@ -4,11 +4,12 @@
 using namespace SVF;
 using namespace SVFUtil;
 
-__attribute__((weak))
+// __attribute__((weak))
 std::string SVFValue::toString() const
 {
-    assert("SVFValue::toString should be implemented or supported by fronted" && false);
-    abort();
+    return "SVFValue";
+    // assert("SVFValue::toString should be implemented or supported by fronted" && false);
+    // abort();
 }
 
 /// Add field (index and offset) with its corresponding type
